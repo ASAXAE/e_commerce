@@ -10,5 +10,34 @@ class BannerItem {
 }
 
 //每一个轮播图的具体类型
+//分类列表
+class CategoryItem {
+  String id;
+  String name;
+  String picture;
+  List<CategoryItem>? children;
+  List<dynamic>? goods;
 
-//flutter必须强制转换 没有隐式转换
+  CategoryItem({
+    required this.id,
+    required this.name,
+    required this.picture,
+    this.children,
+    this.goods,
+  });
+
+  // 工厂构造函数，用于从 JSON 转换
+  factory CategoryItem.fromJson(Map<String, dynamic> json) {
+    return CategoryItem(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      picture: json['picture'] ?? '',
+      children: json['children'] != null
+          ? (json['children'] as List)
+                .map((i) => CategoryItem.fromJson(i))
+                .toList()
+          : null,
+      goods: json['goods'],
+    );
+  }
+}

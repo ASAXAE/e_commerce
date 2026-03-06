@@ -8,4 +8,5 @@ class GlobalConstants {
 //接口地址的常量
 class HttpConstants {
   static const String BANNER_LIST = '/home/banner'; // 登录接口
+  static const String CATEGORY_LIST = '/home/category/head'; // 分类列表接口
 }
