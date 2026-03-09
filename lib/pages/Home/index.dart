@@ -33,9 +33,6 @@ class _HomeViewState extends State<HomeView> {
     //       'https://t4.ftcdn.net/jpg/02/91/24/27/360_F_291242770_z3XC7rJB1Mvc5jVMsEY9Dx2xMrX4sxUi.jpg',
     // ),
   ];
-  //https://www.w3schools.com/css/img_5terre.jpg
-  //https://www.w3schools.com/w3css/img_lights.jpg
-  //https://t4.ftcdn.net/jpg/02/91/24/27/360_F_291242770_z3XC7rJB1Mvc5jVMsEY9Dx2xMrX4sxUi.jpg
 
   List<Widget> _getScrollChildren() {
     return [
@@ -44,7 +41,9 @@ class _HomeViewState extends State<HomeView> {
       //SilverGrid SilverList只能纵向排列
       SliverToBoxAdapter(child: Category(categoryList: _categoryList)),
       SliverToBoxAdapter(child: SizedBox(height: 10)),
-      SliverToBoxAdapter(child: Suggestion()),
+      SliverToBoxAdapter(
+        child: Suggestion(specialRecommendResult: _specialRecommendResult),
+      ),
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
         child: Padding(
@@ -64,14 +63,33 @@ class _HomeViewState extends State<HomeView> {
     ];
   }
 
+  //特惠推荐
+  SpecialRecommendResult _specialRecommendResult = SpecialRecommendResult(
+    id: '',
+    title: '',
+    subTypes: [],
+  );
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _getBannerList();
     _getCategoryList();
+    _getSpecialRecommendList();
   }
 
+  //获取特惠推荐列表
+  void _getSpecialRecommendList() async {
+    try {
+      _specialRecommendResult = await getSpecialRecommendListAPI();
+      setState(() {});
+    } catch (e) {
+      print('获取特惠推荐列表失败: $e');
+    }
+  }
+
+  //获取轮播图列表
   void _getBannerList() async {
     try {
       _bannerList = await getBannerListAPI();
