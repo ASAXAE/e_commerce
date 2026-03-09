@@ -1,6 +1,8 @@
 # e_commerce
 
-A new Flutter project.
+This is my firs Flutter project.
+A new Flutter project about e_commerce on web.
+It wil be applied in ios and android in a few days.
 
 ## Getting Started
 
