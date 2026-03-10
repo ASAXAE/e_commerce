@@ -64,41 +64,45 @@ class _SuggestionState extends State<Suggestion> {
   List<Widget> _getChilderList() {
     List<GoodsItem> list = _getDisplayItems();
     return List.generate(list.length, (index) {
-      return Column(
-        children: [
-          //ClipRRect 可以包裹子元素，实现圆角效果
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              //如果图片加载失败，显示默认图片
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'lib/assets/home_cmd_inner.png',
-                  width: 100,
-                  height: 140,
-                  fit: BoxFit.cover,
-                );
-              },
+      return Padding(
+        padding: EdgeInsets.only(right: 12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //ClipRRect 可以包裹子元素，实现圆角效果
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                //如果图片加载失败，显示默认图片
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'lib/assets/home_cmd_inner.png',
+                    width: 100,
+                    height: 140,
+                    fit: BoxFit.cover,
+                  );
+                },
 
-              list[index].picture,
-              width: 100,
-              height: 140,
-              fit: BoxFit.cover,
+                list[index].picture,
+                width: 100,
+                height: 140,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 223, 176, 36),
-              borderRadius: BorderRadius.circular(12),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 223, 176, 36),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                "￥${list[index].price}",
+                style: TextStyle(color: Colors.white, fontSize: 12),
+              ),
             ),
-            child: Text(
-              "￥${list[index].price}",
-              style: TextStyle(color: Colors.white, fontSize: 12),
-            ),
-          ),
-        ],
+          ],
+        ),
       );
     });
   }
@@ -129,6 +133,7 @@ class _SuggestionState extends State<Suggestion> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildLeft(),
+                SizedBox(width: 30),
                 Expanded(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,

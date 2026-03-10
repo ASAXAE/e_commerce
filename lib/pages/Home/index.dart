@@ -122,7 +122,8 @@ class _HomeViewState extends State<HomeView> {
     }
     _isLoading = true;
     int requestLimit = _page * 8;
-    _recommendList = await getRecommendListAPI({"limit": requestLimit});
+    final list = await getRecommendListAPI({"limit": requestLimit});
+    _recommendList.addAll(list);
     _page++;
 
     _isLoading = false;
