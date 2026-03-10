@@ -130,9 +130,12 @@ class _SuggestionState extends State<Suggestion> {
               children: [
                 _buildLeft(),
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: _getChilderList(),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: _getChilderList(),
+                    ),
                   ),
                 ),
               ],

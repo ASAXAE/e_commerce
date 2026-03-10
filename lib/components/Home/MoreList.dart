@@ -39,7 +39,7 @@ class _MoreListState extends State<MoreList> {
               widget.recommendList[index].name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: 14),
             ),
           ),
           SizedBox(height: 6),
@@ -53,7 +53,7 @@ class _MoreListState extends State<MoreList> {
                     text: "¥${widget.recommendList[index].price}",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.w800,
                     ),
                     children: [
@@ -92,7 +92,7 @@ class _MoreListState extends State<MoreList> {
             crossAxisCount: 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 0.75,
+            childAspectRatio: 0.65,
           ),
       itemBuilder: (BuildContext context, int index) {
         return Padding(
