@@ -1,8 +1,5 @@
-//基于Dio进行二次封装
-
 import 'package:dio/dio.dart';
 import 'package:e_commerce/constants/index.dart';
-import 'package:e_commerce/utils/ToastUtils.dart';
 
 class DioRequest {
   final _dio = Dio();
@@ -59,7 +56,7 @@ class DioRequest {
     try {
       Response<dynamic> res = await task;
       final data = res.data as Map<String, dynamic>;
-      if (data['code'] == GlobalConstants.SUCCESS_CODE) {
+      if (data['code'].toString() == GlobalConstants.SUCCESS_CODE) {
         //才认定http状态码和业务状态码都正常 可以放行
         return data['result']; //只要result结果
       } else {

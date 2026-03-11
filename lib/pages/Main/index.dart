@@ -2,7 +2,9 @@ import 'package:e_commerce/pages/Category/index.dart';
 import 'package:e_commerce/pages/Home/index.dart';
 import 'package:e_commerce/pages/Mine/index.dart';
 import 'package:e_commerce/pages/cart/index.dart';
+import 'package:e_commerce/stores/userController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -12,6 +14,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  // 在根页面注入 userController，保证整个应用生命周期内可用
+  final userController _userController = Get.put(
+    userController(),
+    permanent: true,
+  );
+
   //定义数据 根据数据进行渲染4个导航
   //一般程序的导航是固定的
   final List<Map<String, String>> _tabList = [
@@ -37,6 +45,13 @@ class _MainPageState extends State<MainPage> {
     },
   ];
   int _currentIndex = 0;
+  // 定义子页面列表，避免每次 build 都重新创建
+  final List<Widget> _children = [
+    HomeView(),
+    CategoryView(),
+    CartView(),
+    MineView(),
+  ];
 
   //返回底部渲染的四个分类
   List<BottomNavigationBarItem> _getTabBarWidget() {
@@ -53,16 +68,12 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  List<Widget> _getChildern() {
-    return [HomeView(), CategoryView(), CartView(), MineView()];
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // 安全区域
       body: SafeArea(
-        child: IndexedStack(index: _currentIndex, children: _getChildern()),
+        child: IndexedStack(index: _currentIndex, children: _children),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,

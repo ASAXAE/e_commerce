@@ -27,16 +27,16 @@ class UserInfo {
   });
 
   factory UserInfo.fromJSON(Map<String, dynamic> json) => UserInfo(
-    account: json["account"] ?? "",
-    avatar: json["avatar"] ?? "",
-    birthday: json["birthday"] ?? "",
-    cityCode: json["cityCode"] ?? "",
-    gender: json["gender"] ?? "",
-    id: json["id"] ?? "",
-    mobile: json["mobile"] ?? "",
-    nickname: json["nickname"] ?? "",
-    profession: json["profession"] ?? "",
-    provinceCode: json["provinceCode"] ?? "",
-    token: json["token"] ?? "",
+    account: json["account"]?.toString() ?? "",
+    avatar: json["avatar"]?.toString() ?? "",
+    birthday: json["birthday"]?.toString() ?? "",
+    cityCode: json["cityCode"]?.toString() ?? "",
+    gender: json["gender"]?.toString() ?? "",
+    id: json["id"]?.toString() ?? "",
+    mobile: json["mobile"]?.toString() ?? "",
+    nickname: json["nickname"]?.toString() ?? "",
+    profession: json["profession"]?.toString() ?? "",
+    provinceCode: json["provinceCode"]?.toString() ?? "",
+    token: json["token"]?.toString() ?? "",
   );
 }
