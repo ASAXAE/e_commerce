@@ -1,7 +1,9 @@
+import 'package:e_commerce/api/user.dart';
 import 'package:e_commerce/pages/Category/index.dart';
 import 'package:e_commerce/pages/Home/index.dart';
 import 'package:e_commerce/pages/Mine/index.dart';
 import 'package:e_commerce/pages/cart/index.dart';
+import 'package:e_commerce/stores/tokenManager.dart';
 import 'package:e_commerce/stores/userController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,6 +54,20 @@ class _MainPageState extends State<MainPage> {
     CartView(),
     MineView(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    //初始化用户
+    _initUser();
+  }
+
+  Future<void> _initUser() async {
+    await tokenManager.init(); //初始化token
+    if (tokenManager.getToken().isNotEmpty) {
+      _userController.updateUserInfo(await getUserInfoAPI());
+    }
+  }
 
   //返回底部渲染的四个分类
   List<BottomNavigationBarItem> _getTabBarWidget() {
