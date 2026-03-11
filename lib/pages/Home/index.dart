@@ -182,6 +182,7 @@ class _HomeViewState extends State<HomeView> {
     _page = 1;
     _isLoading = false;
     _hasMore = true;
+    _recommendList = [];
     await _getBannerList();
     await _getCategoryList();
     await _getSpecialRecommendList();
@@ -189,7 +190,7 @@ class _HomeViewState extends State<HomeView> {
     await _getOneStopList();
     await _getRecommendList();
     // 数据获取成功
-    ToastUtils.showToast(context, msg: '刷新成功');
+    ToastUtils.showToast(context, '刷新成功');
     setState(() {});
     _paddingTop = 0;
   }
