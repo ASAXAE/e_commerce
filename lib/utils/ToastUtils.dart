@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 class ToastUtils {
   //阀门控制
-  static bool showLoading = false;
+  static bool _isShowing = false;
+
   static void showToast(BuildContext context, String msg) {
-    if (ToastUtils.showLoading) {
+    if (_isShowing) {
       return;
     }
-    ToastUtils.showLoading = true;
+    _isShowing = true;
     Future.delayed(Duration(seconds: 3), () {
-      ToastUtils.showLoading = false;
+      _isShowing = false;
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

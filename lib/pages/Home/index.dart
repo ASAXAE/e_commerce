@@ -123,11 +123,12 @@ class _HomeViewState extends State<HomeView> {
     _isLoading = true;
     int requestLimit = _page * 8;
     final list = await getRecommendListAPI({"limit": requestLimit});
-    _recommendList.addAll(list);
+    _recommendList = list;
     _page++;
 
     _isLoading = false;
-    _hasMore = _recommendList.length >= requestLimit;
+    _hasMore = list.length >= requestLimit;
+    setState(() {});
   }
 
   // 获取热榜推荐列表

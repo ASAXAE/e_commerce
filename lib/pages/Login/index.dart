@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:e_commerce/api/user.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/utils/ToastUtils.dart';
 
@@ -66,6 +68,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  //登录方法
+  _login() async {
+    try {
+      final res = await loginAPI({
+        'account': _phoneController.text,
+        'password': _codeController.text,
+      });
+      print(res);
+      ToastUtils.showToast(context, '登录成功');
+      Navigator.pop(context);
+    } catch (e) {
+      String errorMsg = '登录失败，请稍后再试';
+      if (e is DioException) {
+        errorMsg = e.message ?? errorMsg;
+      }
+      ToastUtils.showToast(context, errorMsg);
+    }
+  }
+
   // 登录按钮Widget
   Widget _buildLoginButton() {
     return SizedBox(
@@ -77,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           if (_key.currentState!.validate()) {
             //勾选框判断
             if (_isChecked) {
-              ToastUtils.showToast(context, '登录成功');
+              _login();
             } else {
               ToastUtils.showToast(context, '请勾选用户协议');
             }
