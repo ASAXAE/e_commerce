@@ -1,8 +1,10 @@
 import 'package:e_commerce/api/mine.dart';
 import 'package:e_commerce/components/Home/MoreList.dart';
 import 'package:e_commerce/components/Mine/Guess.dart';
+import 'package:e_commerce/stores/tokenManager.dart';
 import 'package:e_commerce/stores/userController.dart';
 import 'package:e_commerce/viewmodels/Home.dart';
+import 'package:e_commerce/viewmodels/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +17,48 @@ class MineView extends StatefulWidget {
 
 class _MineViewState extends State<MineView> {
   final userController _userController = Get.find();
+  //退出登录
+  Widget _getLogout() {
+    return _userController.user.value.id.isNotEmpty
+        ? Expanded(
+            child: GestureDetector(
+              onTap: () {
+                //弹出确认提示窗
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('提示'),
+                      content: Text('确认推出吗'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('取消'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            //清除GetX 删除token
+                            await tokenManager.removeToken();
+                            //GetX内存数据
+                            _userController.updateUserInfo(
+                              UserInfo.fromJSON({}),
+                            );
+                            Navigator.pop(context);
+                          },
+                          child: Text('确认'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Text('退出', textAlign: TextAlign.end),
+            ),
+          )
+        : Text('');
+  }
 
   Widget _buildHeader() {
     return Container(
@@ -65,6 +109,7 @@ class _MineViewState extends State<MineView> {
               ],
             ),
           ),
+          Obx(() => _getLogout()),
         ],
       ),
     );

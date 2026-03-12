@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:e_commerce/api/user.dart';
 import 'package:e_commerce/stores/tokenManager.dart';
 import 'package:e_commerce/stores/userController.dart';
+import 'package:e_commerce/utils/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/utils/ToastUtils.dart';
 import 'package:get/get.dart';
@@ -76,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
   //登录方法
   _login() async {
     try {
+      Loadingdialog.show(context, message: '努力加载中');
       final res = await loginAPI({
         'account': _phoneController.text,
         'password': _codeController.text,
@@ -84,10 +86,11 @@ class _LoginPageState extends State<LoginPage> {
       //更新用户信息
       tokenManager.setToken(res.token);
       _userController.updateUserInfo(res);
-
+      Loadingdialog.hide(context);
       ToastUtils.showToast(context, '登录成功');
       Navigator.pop(context);
     } catch (e) {
+      Loadingdialog.hide(context);
       String errorMsg = '登录失败，请稍后再试';
       if (e is DioException) {
         errorMsg = e.message ?? errorMsg;
