@@ -47,8 +47,8 @@ class _MainPageState extends State<MainPage> {
     },
   ];
   int _currentIndex = 0;
-  // 定义子页面列表，避免每次 build 都重新创建
-  final List<Widget> _children = [
+  // 将子页面列表改为 getter，以便在热重载时能够反映子页面的代码更改
+  List<Widget> get _children => [
     HomeView(),
     CategoryView(),
     CartView(),
