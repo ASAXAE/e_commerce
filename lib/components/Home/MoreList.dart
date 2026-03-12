@@ -48,30 +48,37 @@ class _MoreListState extends State<MoreList> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text.rich(
-                  TextSpan(
-                    text: "¥${widget.recommendList[index].price}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    children: [
-                      TextSpan(text: " "),
-                      TextSpan(
-                        text: "${widget.recommendList[index].price}",
-                        style: TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          color: Colors.grey,
-                          fontSize: 12,
-                        ),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: "¥${widget.recommendList[index].price}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
                       ),
-                    ],
+                      children: [
+                        TextSpan(text: " "),
+                        TextSpan(
+                          text: "${widget.recommendList[index].price}",
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                SizedBox(width: 4),
                 Text(
                   "${widget.recommendList[index].payCount}人付款",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

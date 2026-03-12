@@ -27,27 +27,30 @@ class _HotState extends State<Hot> {
 
   // 构建子项
   List<Widget> _getChildrenList() {
-    return _items.map((item) {
+    return _items.asMap().entries.map((entry) {
+      int index = entry.key;
+      GoodsItem item = entry.value;
       return Expanded(
         child: Container(
-          //width: 80,
+          margin: EdgeInsets.only(left: index == 0 ? 0 : 10),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  item.picture,
-                  width: 80,
-                  height: 100,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      "lib/assets/home_cmd_inner.png",
-                      width: 80,
-                      height: 100,
-                    );
-                  },
+                child: AspectRatio(
+                  aspectRatio: 1.0,
+                  child: Image.network(
+                    item.picture,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "lib/assets/home_cmd_inner.png",
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  ),
                 ),
               ),
               SizedBox(height: 5),
@@ -106,10 +109,7 @@ class _HotState extends State<Hot> {
             // 顶部内容
             _buildHeader(),
             SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: _getChildrenList(),
-            ),
+            Row(children: _getChildrenList()),
           ],
         ),
       ),
