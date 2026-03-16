@@ -164,12 +164,15 @@ class _CategoryViewState extends State<CategoryView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '¥${product.price.toStringAsFixed(0)}',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                      Expanded(
+                        child: Text(
+                          '¥${product.price.toStringAsFixed(0)}',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                       IconButton(

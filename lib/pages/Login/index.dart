@@ -148,20 +148,22 @@ class _LoginPageState extends State<LoginPage> {
           // 可选：设置边框
           side: BorderSide(color: Colors.grey, width: 2.0),
         ),
-        Text.rich(
-          TextSpan(
-            children: [
-              TextSpan(text: "查看并同意"),
-              TextSpan(
-                text: "《隐私条款》",
-                style: TextStyle(color: Colors.blue),
-              ),
-              TextSpan(text: "和"),
-              TextSpan(
-                text: "《用户协议》",
-                style: TextStyle(color: Colors.blue),
-              ),
-            ],
+        Expanded(
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: "查看并同意"),
+                TextSpan(
+                  text: "《隐私条款》",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                TextSpan(text: "和"),
+                TextSpan(
+                  text: "《用户协议》",
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ],
+            ),
           ),
         ),
       ],

@@ -80,11 +80,14 @@ class _HotState extends State<Hot> {
           ),
         ),
         SizedBox(width: 10),
-        Text(
-          widget.type == "step" ? "精心优选" : "最受欢迎",
-          style: TextStyle(
-            fontSize: 12,
-            color: const Color.fromARGB(255, 124, 63, 58),
+        Expanded(
+          child: Text(
+            widget.type == "step" ? "精心优选" : "最受欢迎",
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 12,
+              color: const Color.fromARGB(255, 124, 63, 58),
+            ),
           ),
         ),
       ],
